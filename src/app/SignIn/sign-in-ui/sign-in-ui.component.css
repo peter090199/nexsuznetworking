@@ -1,0 +1,346 @@
+/* Container to center the login card */
+
+.main-background{
+  background: linear-gradient(to right, rgba(11, 203, 174, 0.852), rgba(47, 44, 225, 0.748));
+  font-family: Verdana, sans-serif;
+  margin: 0px !important;
+  height: auto;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+
+}
+.mat-card mat-icon {
+  color: #185291; /* Replace #007bff with any color you prefer */
+}
+.width2{
+  margin-bottom: 20px;
+}
+
+.agreement-section {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #555;
+  margin: 10px;
+}
+
+
+/* Card styling with scrolling enabled */
+/*  */
+
+/* Full width for form fields and button */
+.full-width {
+  width: 100%;
+}
+
+
+.signin-button {
+  width: 100%;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 600px) {
+  .login-container {
+    padding: 10px;
+  }
+
+  .login-card {
+    padding: 15px;
+    max-height: 90vh; /* Allow a bit more height on mobile */
+    border-radius: 10px; 
+  }
+
+  .signin-button {
+    margin-top: 2px;
+  }
+
+}
+
+.login-dialog {
+  text-align: center;
+  max-width: 320px;
+  padding: 20px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+
+  .logo {
+    font-size: 60px;
+    color: #3f51b5;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .logo.loading {
+    animation: spin 1s infinite linear;
+  }
+
+  .login-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.968); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: background 1s ease-in-out; /* Background color transition */
+}
+
+/* Initial background color for spinner-container */
+.spinner-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  animation: fadeIn 0.1s ease-in-out;
+  transition: background-color 0.2s ease-in-out; /* Smooth background color transition */
+}
+
+
+
+/* Make the image circular with transparent background and solid border */
+.logo-centered {
+  width: 200px;  /* Set a fixed width (make sure it’s square) */
+  height: 200px; /* Set a fixed height (make sure it’s square) */
+  border-radius: 50%;  /* Makes the image circular */
+  object-fit: cover; /* Ensures the image covers the entire area without distortion */
+  background-color: transparent; /* Transparent background */
+  transition: border-color 0.1s ease; /* Transition for border color and shadow */
+  animation: colorChange 0.1s infinite; 
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.logo-centered:hover {
+  animation: colorChange 2s infinite; /* Infinite animation loop */
+}
+/* Position the logo image inside the spinner */
+.logo-centered {
+  max-width: 40%; /* Set max width for the logo */
+  height: auto; /* Maintain aspect ratio */
+  transition: filter 1s ease-in-out; /* Optional: apply color transition */
+  margin-bottom: 20px; /* Add some spacing if necessary */
+}
+
+/* Responsive adjustments for mat-spinner (optional) */
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Responsive size for logo */
+@media (max-width: 768px) {
+  .logo-centered {
+    max-width: 70px; /* Maximum width for large screens */
+    max-height: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-centered {
+    max-width: 70px; /* Maximum width for large screens */
+    max-height: 70px;
+  }
+}
+
+/* Add background color transition for the overlay */
+.overlay {
+  transition: background-color 0.2s ease-in-out; /* Smooth background transition */
+}
+
+/* Example of changing background color on loading */
+.overlay.loading {
+  background-color: #4e8bfc; /* Change to blue background when loading */
+}
+mat-spinner {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);  /* Center the spinner inside the image */
+  width: 15vw;  /* Responsive width (15% of viewport width) */
+  height: 15vw; /* Responsive height (15% of viewport width) */
+  max-width: 100px; /* Maximum width for large screens */
+  max-height: 100px; /* Maximum height for large screens */
+}
+
+
+
+/* ==========================================
+   Windows 11 Loading Screen
+========================================== */
+
+.windows-loading{
+    position:fixed;
+    inset:0;
+    z-index:999999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(255,255,255,.96);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    animation:fadeIn .25s ease;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.loading-box{
+    text-align:center;
+    user-select:none;
+}
+
+.loading-box h3{
+    margin:28px 0 8px;
+    font-size:24px;
+    font-weight:600;
+    color:#202124;
+}
+
+.loading-box p{
+    margin:0;
+    font-size:14px;
+    color:#5f6368;
+}
+
+/* ==========================================
+   Windows Spinner
+========================================== */
+
+.win-spinner{
+    position:relative;
+    width:72px;
+    height:72px;
+    margin:auto;
+    animation:spinnerRotate 1.4s linear infinite;
+}
+
+.win-spinner span{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:8px;
+    height:8px;
+    margin:-4px;
+    border-radius:50%;
+    background:#0078D4;
+    transform-origin:0 -28px;
+}
+
+.win-spinner span:nth-child(1){
+    transform:rotate(0deg) translateY(-28px);
+    opacity:1;
+}
+
+.win-spinner span:nth-child(2){
+    transform:rotate(45deg) translateY(-28px);
+    opacity:.9;
+}
+
+.win-spinner span:nth-child(3){
+    transform:rotate(90deg) translateY(-28px);
+    opacity:.8;
+}
+
+.win-spinner span:nth-child(4){
+    transform:rotate(135deg) translateY(-28px);
+    opacity:.7;
+}
+
+.win-spinner span:nth-child(5){
+    transform:rotate(180deg) translateY(-28px);
+    opacity:.6;
+}
+
+.win-spinner span:nth-child(6){
+    transform:rotate(225deg) translateY(-28px);
+    opacity:.5;
+}
+
+.win-spinner span:nth-child(7){
+    transform:rotate(270deg) translateY(-28px);
+    opacity:.4;
+}
+
+.win-spinner span:nth-child(8){
+    transform:rotate(315deg) translateY(-28px);
+    opacity:.3;
+}
+
+/* ==========================================
+   Animations
+========================================== */
+
+@keyframes spinnerRotate{
+    from{
+        transform:rotate(0deg);
+    }
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media (max-width:600px){
+
+    .loading-box h3{
+        font-size:20px;
+    }
+
+    .loading-box p{
+        font-size:13px;
+    }
+
+    .win-spinner{
+        width:64px;
+        height:64px;
+    }
+}

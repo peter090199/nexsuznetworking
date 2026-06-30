@@ -1,0 +1,32 @@
+
+
+<mat-dialog-actions align="end">
+    <h2 mat-dialog-title>All Suggested People</h2>
+    <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon" color="warn">close</mat-icon>
+    </button>
+</mat-dialog-actions>
+
+<mat-dialog-content >
+  <div class="suggestions">
+    <mat-card class="suggestion-card" *ngFor="let person of data.people" [routerLink]="['/profile', person.code]">
+      <button mat-icon-button class="close-button">
+        <mat-icon>close</mat-icon>
+      </button>
+       <div class="profile-image-container">
+                <a [routerLink]="['/profile', person.code]">
+                    <img [src]="person.photo_pic" [alt]="person.fullname" class="profile-image" />
+                </a>
+       </div>
+       
+      <mat-card-title class="custom-title">{{ person.fullname }}</mat-card-title>
+      <mat-card-subtitle>{{ person.profession || '--' }}</mat-card-subtitle>
+      <p class="based-text">Based on your profile</p>
+      <button mat-stroked-button color="primary">
+        <mat-icon>person_add</mat-icon>
+        Connect
+      </button>
+    </mat-card>
+  </div>
+</mat-dialog-content>
+

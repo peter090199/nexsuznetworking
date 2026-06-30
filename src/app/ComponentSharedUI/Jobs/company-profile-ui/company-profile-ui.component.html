@@ -1,0 +1,139 @@
+<div class="section">
+
+  <!-- Cover Photo -->
+  <div class="cover-photo-container">
+    <img [src]="profiles?.coverphoto" alt="Cover Photo" class="cover-photo-img" />
+  </div>
+
+  <!-- Profile Info -->
+  <div *ngIf="!isloading; else profileSkeleton" class="profile-details">
+    <div class="profile-info" *ngIf="profiles">
+      <div class="profile-picture">
+        <div class="avatar-container">
+          <img class="profile-img" [src]="profiles?.photo_pic || 'assets/images/default.png'" alt="Profile" />
+          <mat-icon class="status-icon online">circle</mat-icon>
+        </div>
+      </div>
+
+      <h1>
+        {{ profiles.fullname }}
+        <small>{{ profiles.current_location }}</small>
+      </h1>
+
+      <p>{{ profiles.followers }} followers · {{ profiles.following }} following</p>
+
+      <div class="button-gap">
+        <button mat-flat-button *ngIf="currentUserCode !== ownCode" [color]="
+      followStatus === 'accepted'
+        ? 'accent'
+        : followStatus === 'pending'
+        ? 'warn'
+        : 'primary'
+        " [disabled]="followStatus === 'pending'" (click)="
+         feature.can('NETWORK_FEED')
+        ? AddFollow(currentUserCode, followStatus, profiles.fname, profiles.lname)
+        : sharedRoutines.openUpgradeModal()
+          ">
+          <mat-icon *ngIf="followStatus === 'none' || followStatus === 'cancelled'">
+            person_add
+          </mat-icon>
+
+          <mat-icon *ngIf="followStatus === 'pending'" class="hourglass-animated">
+            hourglass_top
+          </mat-icon>
+
+          <mat-icon *ngIf="followStatus === 'accepted'">
+            check_circle
+          </mat-icon>
+
+          <ng-container [ngSwitch]="followStatus">
+            <span *ngSwitchCase="'none'">Connect</span>
+            <span *ngSwitchCase="'pending'">Pending</span>
+            <span *ngSwitchCase="'accepted'">Connected</span>
+            <span *ngSwitchCase="'cancelled'">Connect</span>
+          </ng-container>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Skeleton Loader -->
+  <ng-template #profileSkeleton>
+    <div class="profile-skeleton">
+      <div class="skeleton skeleton-avatar"></div>
+      <div class="skeleton skeleton-text" style="width:40%"></div>
+      <div class="skeleton skeleton-text" style="width:20%"></div>
+    </div>
+  </ng-template>
+
+  <!-- Tabs -->
+  <mat-tab-group>
+
+    <!-- HOME TAB -->
+    <mat-tab label="Home">
+
+      <!-- Home Skeleton Posts -->
+      <div *ngIf="isloading">
+        <mat-card class="post-box-container" *ngFor="let s of skeletonPosts">
+          <mat-card-header>
+            <div class="skeleton skeleton-avatar"></div>
+            <div class="skeleton skeleton-text" style="width: 50%"></div>
+          </mat-card-header>
+          <div class="skeleton skeleton-img"></div>
+          <div class="skeleton skeleton-text"></div>
+          <div class="skeleton skeleton-text" style="width: 70%"></div>
+        </mat-card>
+      </div>
+      <section *ngIf="profiles" class="post-box-container">
+
+        <!-- Company Header -->
+        <div class="company-header">
+          <img class="company-logo" [src]="profiles.photo_pic || 'assets/images/default.png'" alt="Company Logo">
+
+          <div class="company-info">
+            <h1>{{ profiles.fullname }}</h1>
+            <small>{{ profiles.profession }}</small>
+            <p class="company-meta">
+              {{ profiles.industry }} · {{ profiles.companysize }} employees
+            </p>
+            <a class="company-website" [href]="profiles.companywebsite" target="_blank">
+              {{ profiles.companywebsite }}
+            </a>
+          </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="about-section">
+          <h3>About</h3>
+          <p>{{ profiles.about || 'No company description available.' }}</p>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <!-- Location Section -->
+        <div class="location-section">
+          <h3>Headquarters</h3>
+          <p>{{ profiles.current_location || 'Location not provided' }}</p>
+        </div>
+
+      </section>
+    </mat-tab>
+
+    <!-- POSTS TAB -->
+    <mat-tab label="Post">
+      <app-private-post></app-private-post>
+    </mat-tab>
+
+    <!-- JOBS TAB -->
+    <mat-tab label="Jobs">
+      <app-jobs-client></app-jobs-client>
+    </mat-tab>
+
+    <!-- PEOPLE TAB -->
+    <mat-tab label="People">
+      <app-people></app-people>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>

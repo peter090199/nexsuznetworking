@@ -1,0 +1,291 @@
+/* ===== Overlay Background (MatDialog) ===== */
+/* ::ng-deep .cdk-overlay-backdrop {
+  background: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(5px);
+} */
+
+
+/* ===== Overlay Background (MatDialog) ===== */
+::ng-deep .cdk-overlay-backdrop {
+background: rgba(61, 60, 60, 0.8) !important;
+backdrop-filter: blur(2px);
+}
+
+
+
+/* ===== Modal Container ===== */
+.modal-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  height: 80vh;
+  width: 95vw;
+  max-width: 1100px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  animation: fadeInScale 0.25s ease-in-out;
+}
+
+/* Smooth entry animation */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== Left Side (Media Viewer) ===== */
+.modal-left {
+  flex: 1;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.media-item {
+  width: 100%;
+  height: auto;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+/* ===== Right Side (Comments & Reactions) ===== */
+.modal-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  background: #fff;
+  overflow-y: auto;
+}
+
+.modal-right::-webkit-scrollbar {
+  width: 6px;
+}
+.modal-right::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 10px;
+}
+
+/* ===== Reactions & Buttons ===== */
+.reactions-summary {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 2px;
+}
+
+.reaction-link {
+  cursor: pointer;
+  color: #0a66c2;
+  text-decoration: none;
+  font-size: 14px;
+}
+.reaction-link:hover {
+  text-decoration: underline;
+}
+
+.interaction-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  position: relative;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.reactions-popup {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  display: flex;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  padding: 6px 10px;
+  gap: 6px;
+  z-index: 10;
+}
+
+.reactions-popup .reaction {
+  cursor: pointer;
+  font-size: 20px;
+  transition: transform 0.2s;
+}
+.reactions-popup .reaction:hover {
+  transform: scale(1.3);
+}
+
+/* ===== Comments Section ===== */
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.comment {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.comment-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment-body {
+  background: #f3f2ef;
+  padding: 10px 12px;
+  border-radius: 10px;
+  flex: 1;
+}
+
+.comment-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.reply-input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.replies {
+  margin-top: 8px;
+  margin-left: 40px;
+}
+
+.reply {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.reply-body {
+  background: #e8f0fe;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+/* ===== MOBILE-ONLY (max-width: 600px) ===== */
+@media (max-width: 600px) {
+
+  /* Modal Container */
+  .modal-container {
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    background: #fff;
+    box-shadow: none;
+  }
+
+  /* Left Side (Media) */
+  .modal-left {
+    height: 45%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .media-item {
+    width: 100%;
+    max-height: 45vh;
+    object-fit: cover;
+  }
+
+  /* Right Side (Comments & Reactions) */
+  .modal-right {
+    height: 55%;
+    padding: 10px;
+    overflow-y: auto;
+    background: #fff;
+  }
+
+  .modal-right::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Reaction & Interaction Buttons */
+  .interaction-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    margin-bottom: 2px;
+  }
+
+  .interaction-buttons button {
+    width: 100%;
+    justify-content: flex-start;
+    padding-left: 14px;
+    font-size: 14px;
+  }
+
+  .reactions-popup {
+    bottom: 45px;
+    left: 0;
+    gap: 5px;
+    padding: 5px 8px;
+  }
+
+  .reactions-popup .reaction {
+    font-size: 18px;
+  }
+
+  /* Comments Section */
+  .form-row {
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .comment {
+    margin-bottom: 10px;
+  }
+
+  .comment-avatar {
+    width: 30px;
+    height: 30px;
+  }
+
+  .comment-body {
+    font-size: 14px;
+    padding: 8px 10px;
+    border-radius: 8px;
+  }
+
+  .comment-actions {
+    gap: 8px;
+    margin-top: 3px;
+  }
+
+  .replies {
+    margin-top: 6px;
+    margin-left: 30px;
+  }
+
+  .reply-body {
+    font-size: 13px;
+    padding: 6px 8px;
+  }
+
+}

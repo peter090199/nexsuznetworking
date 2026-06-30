@@ -1,0 +1,89 @@
+<section class="container">
+  <mat-card-footer *ngIf="isLoading">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+
+  <div class="profile-header">
+    <div class="cover-photo-container">
+      <img class="cover-photo-img" [src]="preview || users?.coverphoto || 'assets/images/default-cover.png'"
+        alt="Cover Photo" />
+      <div class="upload-container">
+        <input type="file" accept="image/*" (change)="uploadCoverPhoto($event)" #fileInput hidden />
+        <button mat-raised-button color="primary" class="edit-cover-btn" (click)="fileInput.click()">
+          <mat-icon>photo_camera</mat-icon> Upload Cover Photo
+        </button>
+      </div>
+      <mat-progress-bar *ngIf="uploadProgress >= 0" mode="determinate" [value]="uploadProgress"></mat-progress-bar>
+    </div>
+
+    <div class="profile-avatar-info">
+      <div class="profile-avatar">
+        <div class="avatar-container">
+          <img *ngIf="profile_pic?.photo_pic; else defaultAvatar" [src]="profile_pic.photo_pic" alt="Profile Picture"
+            class="profile-pic" />
+          <ng-template #defaultAvatar>
+            <img src="assets/images/default.png" alt="Default Avatar" class="profile-pic" />
+          </ng-template>
+        </div>
+        <button mat-button color="danger" class="edit-avatar-btn" (click)="uploadPic()">
+          <mat-icon>photo_camera</mat-icon>
+        </button>
+      </div>
+      <div class="profile-info">
+        <h2>{{ users?.fullname || 'User Name' }}</h2>
+        <p class="subtitle">{{ users?.profession || 'No profession' }}</p>
+        <small>{{ users?.role_code || 'No role' }}</small>
+      </div>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab label="Profile Details">
+      <mat-card-content>
+        <div class="profile-row" *ngFor="let field of profileFields">
+          <mat-icon class="profile-icon">{{ field.icon }}</mat-icon>
+          <ng-container [ngSwitch]="field.type">
+            <a *ngSwitchCase="'link'" [href]="'https://' + users[field.key]" target="_blank">{{ users[field.key] || 'No
+              website' }}</a>
+            <span *ngSwitchDefault>{{ users[field.key] || field.default }}</span>
+          </ng-container>
+        </div>
+      </mat-card-content>
+    </mat-tab>
+
+    <mat-tab label="Account Settings">
+      <mat-card-content>
+        <div class="profile-row">
+          <mat-icon class="profile-icon">security</mat-icon>
+          <span>Password last changed: {{ users?.password_updated_at || 'Not set' }}</span>
+        </div>
+        <div class="profile-row">
+          <mat-icon class="profile-icon">visibility</mat-icon>
+          <span>Account Visibility: {{ users?.visibility || 'Private' }}</span>
+        </div>
+        <mat-card-actions class="button-end">
+          <button mat-raised-button color="primary" (click)="editProfile()">Edit Profile</button>
+          <button mat-stroked-button color="accent" (click)="Changepassword()">Change Password</button>
+        </mat-card-actions>
+      </mat-card-content>
+    </mat-tab>
+
+    <mat-tab label="Activity">
+      <mat-card-content>
+        <div class="profile-row">
+          <p *ngIf="!users?.activity?.length">No recent activity.</p>
+          <ul *ngIf="users?.activity?.length">
+            <li *ngFor="let activity of users.activity">
+              <mat-icon class="profile-icon">history</mat-icon>
+              {{ activity }}
+            </li>
+          </ul>
+        </div>
+      </mat-card-content>
+    </mat-tab>
+  </mat-tab-group>
+
+<app-account-type-plan *ngIf="sharedRoutines.getRole() === 'DEF-USERS'"></app-account-type-plan>
+
+</section>

@@ -1,0 +1,30 @@
+.search-container {
+  padding: 16px;
+  width: 100%;
+   width: 500px;
+  height: 200px;
+  margin: 12px;
+}
+
+.results {
+  margin-top: 10px;
+}
+
+.result-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.result-item:hover {
+  background: #f3f6ff;
+}
+
+.result-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}

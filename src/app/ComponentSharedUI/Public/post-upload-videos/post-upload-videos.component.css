@@ -1,0 +1,139 @@
+/* Main container */
+.post-image-card {
+  position: relative;
+  padding-top: 40px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Slideshow wrapper */
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  max-height: 700px;
+  overflow-y: auto;
+  margin: 0 auto;
+}
+
+/* MAIN VIDEO */
+.slide-video {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+  background: #000;
+}
+
+
+/* Sticky footer */
+.footer-actions {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  background: #fff;
+  z-index: 100;
+}
+
+/* Index text */
+.numbertext {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0,0,0,0.6);
+  padding: 6px 10px;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+/* Arrows */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  padding: 12px;
+  font-size: 20px;
+  color: white;
+  background: rgba(0,0,0,0.4);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+/* Thumbnail container */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+/* VIDEO THUMBNAILS */
+.thumb-video {
+  width: 80px;
+  height: 70px;
+  border-radius: 6px;
+  object-fit: cover;
+  opacity: 0.7;
+  cursor: pointer;
+  border: 2px solid transparent;
+  background: #000;
+}
+
+.thumb-video.active {
+  opacity: 1;
+  border-color: #3f51b5;
+}
+
+/* Warning style */
+.warning-text {
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: #fff3cd;
+  border-left: 5px solid #ff9800;
+  color: #d35400;
+  font-weight: bold;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* Mobile responsive */
+@media screen and (max-width: 992px) {
+  .slide-video {
+    max-height: 40vh;
+  }
+
+  .thumb-video {
+    width: 65px;
+    height: 55px;
+  }
+
+  .footer-actions {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .slide-video {
+    max-height: 35vh;
+  }
+
+  .prev, .next {
+    padding: 8px;
+    font-size: 16px;
+  }
+
+  .thumb-video {
+    width: 60px;
+    height: 50px;
+  }
+}

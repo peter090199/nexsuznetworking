@@ -1,0 +1,34 @@
+<mat-card-header>
+  <h2 mat-dialog-title>Languages</h2>
+</mat-card-header>
+
+<mat-divider></mat-divider>
+
+<div class="container">
+
+  <!-- 🔄 Show loading spinner while deleting -->
+  <div *ngIf="isDeleting" class="loading-bar">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+
+  <!-- ✅ Language list -->
+  <div class="card-container" *ngIf="formLanguage.length > 0; else noLanguages">
+    <div *ngFor="let data of formLanguage; let i = index" class="mat-card-border">
+      <p>{{ data.language }}</p>
+      <div class="button-start">
+        <button mat-icon-button color="warn" (click)="removelanguage(data.id)" [disabled]="isDeleting">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Empty state -->
+  <ng-template #noLanguages>
+    <p class="no-language-message">No language data available.</p>
+  </ng-template>
+</div>
+
+<mat-card-actions class="button-end">
+  <button mat-raised-button color="warn" [mat-dialog-close]="true" [disabled]="isDeleting">Cancel</button>
+</mat-card-actions>

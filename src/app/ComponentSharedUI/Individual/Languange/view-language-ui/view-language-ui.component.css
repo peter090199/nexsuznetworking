@@ -1,0 +1,49 @@
+.container {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 16px;
+  /* Optional, to add some padding inside the container */
+}
+
+.card-container {
+  max-height: 100%;
+  /* Ensure card container fills available height */
+  overflow-y: auto;
+}
+.loading-bar {
+  margin-bottom: 1rem;
+}
+
+.button-start {
+  display: flex;
+  justify-content: flex-start;
+  /* aligns left */
+  gap: 8px;
+  /* spacing between buttons */
+  margin-top: 8px;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+}
+
+p {
+  margin: 10px;
+  font-size: 14px;
+  font-family: 'Verdana', 'San-serif';
+}
+
+.mat-card-border {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 8px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  max-width: 600px;
+  margin-bottom: 5px;
+
+}

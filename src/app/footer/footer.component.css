@@ -1,0 +1,57 @@
+/* General Styles */
+.spacer {
+  flex: 1 1 auto;
+}
+
+.acct-name {
+  color: #1b3cf8;
+}
+
+/* Footer Styles */
+
+
+/* Chat Body Styles */
+.chat-body {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+  margin: 0;
+}
+
+.chat-body button {
+  float: none;
+  margin: 0;
+}
+
+/* Default: Hide the footer */
+#mobile-footer {
+  display: none;
+}
+
+/* Show footer only on mobile screens */
+@media (max-width: 768px) {
+  #mobile-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .chat-body {
+    flex: 1 1 auto;
+    text-align: right;
+  }
+
+  button[mat-icon-button] {
+    flex: 0 0 auto;
+  }
+}

@@ -1,0 +1,248 @@
+.dashboard {
+  padding: 16px;
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
+  height: 90vh;
+}
+
+/* =========================
+   HEADER
+========================= */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #3fb5b5, #5c6bc0);
+  color: #fff;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* =========================
+   STATS GRID
+========================= */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.stat-card.highlight {
+  background: linear-gradient(135deg, #3fb5b5, #5c6bc0);
+  color: #fff;
+}
+
+/* =========================
+   VACANCY CARDS GRID
+========================= */
+.vacancy-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 3fr));
+  gap: 10px;
+  margin: 2px 0;
+}
+
+.vacancy-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.vacancy-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+}
+
+.vacancy-card h3 {
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+  color: #0f172a;
+}
+
+/* =========================
+   TABLE RESPONSIVE FIX
+========================= */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  white-space: nowrap;
+}
+
+th.mat-header-cell {
+  background: #f3f4f6;
+  font-weight: 600;
+}
+
+td.mat-cell {
+  color: #374151;
+}
+
+/* =========================
+   STATUS BADGE
+========================= */
+.status {
+  padding: 4px 10px;
+  border-radius: 14px;
+  font-size: 12px;
+  background: #e5e7eb;
+  display: inline-block;
+}
+
+.status.active {
+  background: #10b981;
+  color: #fff;
+}
+
+/* =========================
+   PIPELINE / KANBAN
+========================= */
+.pipeline {
+  padding: 20px;
+  margin: 24px 0;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+
+.pipeline h3 {
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  color: #0f172a;
+}
+
+.kanban {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+}
+
+.column {
+  background: #f3f4f6;
+  border-radius: 14px;
+  padding: 16px;
+  text-align: center;
+  transition: transform .2s ease;
+}
+
+.column:hover {
+  transform: translateY(-4px);
+}
+
+.column h4 {
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+/* =========================
+   PILLS
+========================= */
+.pill {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.pill.blue   { background: #3b82f6; }
+.pill.orange { background: #f97316; }
+.pill.purple { background: #8b5cf6; }
+.pill.green  { background: #10b981; }
+
+/* =========================
+   RECENT APPLICANTS
+========================= */
+.recent {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 80px;
+}
+
+.applicant {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #3f51b5;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* =========================
+   RESPONSIVE BREAKPOINTS
+========================= */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .header {
+    padding: 16px;
+  }
+
+  .vacancy-cards-container {
+    grid-template-columns: 1fr;
+  }
+
+  .kanban {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Extra small */
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  .kanban {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,118 @@
+.post-image-card {
+  position: relative;
+  padding-top: 40px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.slideshow-container {
+  position: relative;
+  width:700px;
+  width: 100%;
+  margin-top: 20px;
+  min-height: auto;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.slide-image {
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.footer-actions {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  z-index: 100;
+}
+
+.numbertext {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0,0,0,0.6);
+  padding: 6px 10px;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  padding: 12px;
+  font-size: 20px;
+  color: white;
+  background: rgba(0,0,0,0.4);
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.caption-container {
+  text-align: center;
+  padding: 10px 0;
+  font-size: 16px;
+}
+
+/* Thumbnails */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.warning-box {
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: #ffdddd;
+  border-left: 4px solid #e53935;
+  color: #b71c1c;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.image-container img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 6px;
+  opacity: 0.7;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.image-container img.active {
+  opacity: 1;
+  border-color: #3f51b5;
+}
+.warning-text {
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: #fff3cd;       /* light yellow caution */
+  border-left: 5px solid #ff9800; /* orange warning accent */
+  color: #d35400;            /* darker orange text */
+  font-weight: bold;         /* make text bold */
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+
+@media screen and (max-width: 992px) {
+  .footer-actions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}

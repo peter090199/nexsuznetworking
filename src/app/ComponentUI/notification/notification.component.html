@@ -1,0 +1,82 @@
+
+  <mat-card-header class="notifications-header">
+    <!-- <mat-card-title>Notifications</mat-card-title> -->
+    <button mat-button color="primary" class="read-all-btn" (click)="markAllAsRead()">
+      Read All
+    </button>
+  </mat-card-header>
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="primary"></mat-progress-bar>
+
+  <mat-card-content>
+    <mat-tab-group *ngIf="!isLoading">
+      <!-- Unread Notifications -->
+      <mat-tab label="Unread ({{ unreadNotifications().length }})">
+        <div *ngIf="!isLoading && notifications.length === 0" class="no-notifications">
+          No new notifications
+        </div>
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let notif of unreadNotifications()" class="read">
+            <mat-expansion-panel-header>
+              <mat-panel-title (click)="openChat(notif)">
+                <img
+                  [src]="notif.photo_pic || 'assets/images/default.png'"
+                  width="50"
+                  height="50"
+                  style="border-radius: 50%; margin-right: 10px;"
+                  alt="Avatar"
+                />
+                {{ notif.fullname }}
+              </mat-panel-title>
+              <mat-panel-description>
+                {{ notif.created_at | date: 'short' }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+      
+            <div class="message-preview" >{{ notif.message }}</div>
+      
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-tab>
+      
+
+
+      <!-- Read Notifications -->
+      <mat-tab label="Read ({{ readNotifications().length }})">
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let notif of readNotifications()">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <img
+                  [src]="notif.photo_pic || 'assets/images/default.png'"
+                  width="40"
+                  height="40"
+                  style="border-radius: 50%; margin-right: 10px;"
+                  alt="Avatar"
+                />
+                {{ notif.fullname }}
+              </mat-panel-title>
+              <mat-panel-description>
+                {{ notif.created_at | date: 'short' }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+      
+            <div class="message-preview">{{ notif.message }}</div>
+      
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-tab>
+      
+
+
+    </mat-tab-group>
+  </mat-card-content>
+
+  <!-- Card Footer (Optional) -->
+  <mat-card-actions align="end">
+    <!-- <button mat-stroked-button color="primary" (click)="refreshNotifications()">
+      Refresh
+    </button> -->
+  </mat-card-actions>
+
+
+

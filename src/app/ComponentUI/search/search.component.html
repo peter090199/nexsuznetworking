@@ -1,0 +1,56 @@
+<div class="search-container">
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput placeholder="Search users..." [(ngModel)]="searchQuery"
+      (input)="feature.can('SEARCH_ACCESS') ? onSearch() : sharedRoutines.openUpgradeModal()" />
+    <button mat-icon-button matSuffix *ngIf="searchQuery" (click)="clearSearch()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+
+  <!-- RESULTS -->
+  <div class="results">
+    <div *ngFor="let user of users" class="result-item d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center gap-2" (click)="onViewUser(user)">
+        <img [src]="user.photo_pic || 'assets/images/default2.png'" />
+        <a [routerLink]="this.sharedService.getProfileRouteAll(user)" matTooltip="View Profile">
+          {{ user.fullname }}
+        </a>
+      </div>
+      <!-- RIGHT SIDE: VIEW PROFILE -->
+      <button mat-button color="primary" [routerLink]="this.sharedService.getProfileRouteAll(user)"
+        matTooltip="View Profile">
+        View Profile
+      </button>
+
+    </div>
+
+    <!-- HISTORY -->
+    <div *ngIf="!searchQuery && searchHistory.length">
+      <h4>Recent Searches</h4>
+      <div *ngFor="let user of searchHistory" class="result-item d-flex align-items-center justify-content-between">
+        <!-- LEFT -->
+        <div class="d-flex align-items-center gap-2" (click)="searchFromHistory(user.fullname)">
+          <img [src]="user.photo_pic || 'assets/images/default2.png'" />
+          <a [routerLink]="this.sharedService.getProfileRouteAll(user)" matTooltip="View Profile">
+            {{ user.fullname }}
+          </a>
+        </div>
+        <!-- RIGHT -->
+        <button mat-button color="primary" [routerLink]="this.sharedService.getProfileRouteAll(user)"
+          matTooltip="View Profile">
+          View Profile
+        </button>
+
+      </div>
+
+      <button class="clear-btn" (click)="clearHistory()">
+        Clear History
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

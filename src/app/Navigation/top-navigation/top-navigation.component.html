@@ -1,0 +1,164 @@
+<!-- LOADING -->
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<mat-sidenav-container class="layout-container">
+  <mat-toolbar color="primary" class="premium-toolbar">
+    <section class="mobile-header" *ngIf="isMobile">
+      <app-app-logo></app-app-logo>
+
+      <div class="mobile-actions">
+        <button mat-icon-button (click)="toggleSearch()">
+          <mat-icon>search</mat-icon>
+        </button>
+
+        <button mat-icon-button (click)="toggleSidebar()">
+          <mat-icon>{{ isSidebarOpen ? 'close' : 'menu' }}</mat-icon>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- DESKTOP HEADER -->
+    <section class="desktop-header" *ngIf="!isMobile">
+      <app-app-logo></app-app-logo>
+
+      <div class="desktop-nav">
+        <ng-container *ngFor="let link of nav_module">
+
+          <ng-container *ngIf="link.submenus?.length; else normalMenu">
+            <button mat-button class="nav-btn" [matMenuTriggerFor]="menuMap">
+              <i [class]="link.icon"></i>
+              <span>{{ link.description }}</span>
+            </button>
+
+            <mat-menu #menu="matMenu" #menuMap="matMenu">
+              <button mat-menu-item *ngFor="let sub of link.submenus" [routerLink]="sub.route">
+                <i [class]="sub.icon"></i>
+                {{ sub.description }}
+              </button>
+            </mat-menu>
+          </ng-container>
+
+          <ng-template #normalMenu>
+            <button mat-button class="nav-btn" [routerLink]="link.route">
+              <i [class]="link.icon"></i>
+              <span>{{ link.description }}</span>
+            </button>
+          </ng-template>
+
+        </ng-container>
+      </div>
+
+      <div class="desktop-actions">
+        <div class="glass-box">
+
+          <button mat-icon-button class="toolbar-icon" (click)="searchSidenav.open()">
+            <mat-icon>search</mat-icon>
+          </button>
+          <!-- NOTIFICATIONS -->
+          <button mat-icon-button class="toolbar-icon" matTooltip="Notifications" [matBadge]="unreadCount"
+            [matBadgeHidden]="!unreadCount" matBadgeColor="warn"
+            (click)="feature.can('JOB_ALERTS') ? openNotifications() : sharedRoutines.openUpgradeModal()">
+            <mat-icon>notifications</mat-icon>
+          </button>
+
+          <button mat-button class="profile-btn" [matMenuTriggerFor]="userMenu">
+            <ng-container *ngIf="profileservices?.photo_pic; else defaultProfile">
+              <img [src]="profileservices?.photo_pic" class="profile-pic" />
+            </ng-container>
+            <ng-template #defaultProfile>
+              <mat-icon class="default-avatar">account_circle</mat-icon>
+            </ng-template>
+          </button>
+
+          <mat-menu #userMenu="matMenu">
+            <button mat-menu-item [routerLink]="sharedRoutines.getClientProfileRoute(profileservices?.code)">
+              <mat-icon color="primary">person</mat-icon>
+              <span>Profile</span>
+            </button>
+            <button mat-menu-item [routerLink]="sharedRoutines.getsettingsRoute()">
+              <mat-icon color="primary">settings</mat-icon>
+              <span>Settings</span>
+            </button>
+            <button mat-menu-item (click)="onLogout()">
+              <mat-icon color="primary">logout</mat-icon>
+              <span>Logout</span>
+            </button>
+          </mat-menu>
+
+        </div>
+      </div>
+    </section>
+
+  </mat-toolbar>
+
+  <!-- =========================
+       MAIN AREA (FIX OVERFLOW)
+  ========================= -->
+  <div class="layout-body">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" [class.active]="isSidebarOpen">
+
+      <div class="side-header">NEXSUZ</div>
+
+      <div class="side-menu">
+
+        <ng-container *ngFor="let link of nav_module">
+
+          <a *ngIf="!link.submenus?.length" class="menu-item" [routerLink]="link.route" (click)="toggleSidebar()">
+
+            <i [class]="link.icon"></i>
+            <span>{{ link.description }}</span>
+          </a>
+
+          <div *ngIf="link.submenus?.length" class="menu-group">
+
+            <div class="menu-title">
+              <i [class]="link.icon"></i>
+              <span>{{ link.description }}</span>
+            </div>
+
+            <a *ngFor="let sub of link.submenus" class="submenu-item" [routerLink]="sub.route"
+              (click)="toggleSidebar()">
+
+              <i [class]="sub.icon"></i>
+              {{ sub.description }}
+            </a>
+
+          </div>
+
+        </ng-container>
+
+        <div class="menu-item logout" (click)="onLogout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- CONTENT AREA -->
+    <main class="page-content">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+
+  <!-- SEARCH -->
+  <section class="search-overlay" *ngIf="isSearchOpen">
+    <div class="search-backdrop" (click)="toggleSearch()"></div>
+
+    <div class="search-box">
+      <app-search></app-search>
+
+      <button mat-icon-button class="close-btn" (click)="toggleSearch()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </section>
+
+  <mat-sidenav #searchSidenav position="end" mode="over" class="search-sidenav">
+    <app-search></app-search>
+  </mat-sidenav>
+
+</mat-sidenav-container>

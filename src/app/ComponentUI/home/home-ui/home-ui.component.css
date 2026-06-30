@@ -1,0 +1,613 @@
+/* =========================================
+   GLOBAL
+========================================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Verdana,sans-serif;
+}
+
+html,
+body{
+  height:100%;
+  overflow:hidden;
+  background:#f0f2f5;
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:56px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 15px;
+
+  background:#fff;
+  border-bottom:1px solid #dddfe2;
+
+  box-shadow:0 1px 2px rgba(0,0,0,.08);
+
+  z-index:1000;
+}
+
+/* =========================================
+   MAIN LAYOUT
+========================================= */
+.section-container{
+  width:100%;
+  height:100vh;
+  background:#f0f2f5;
+  }
+
+.main-content{
+  padding:70px 15px 20px;
+  overflow-y:auto;
+  overflow-x:hidden;
+  background:#f0f2f5;
+}
+
+/* =========================================
+   SIDENAV
+========================================= */
+.side-nav-left,
+.side-nav-right{
+  width:320px;
+  border:none !important;
+  background:transparent;
+}
+
+/* =========================================
+   LEFT SIDEBAR
+========================================= */
+.left-sidebar{
+  padding:15px;
+  height:100%;
+  overflow-y:auto;
+  scrollbar-width:none;
+}
+
+.left-sidebar::-webkit-scrollbar{
+  display:none;
+}
+
+/* =========================================
+   RIGHT SIDEBAR
+========================================= */
+.right-column{
+  padding:15px;
+  height:100%;
+  overflow-y:auto;
+  scrollbar-width:none;
+}
+
+.right-column::-webkit-scrollbar{
+  display:none;
+}
+
+/* =========================================
+   PROFILE CARD
+========================================= */
+.profile-card{
+  overflow:hidden;
+
+  border-radius:24px !important;
+
+  background:rgba(255,255,255,.9) !important;
+
+  backdrop-filter:blur(18px);
+
+  border:1px solid rgba(255,255,255,.4);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.08),
+    0 1px 2px rgba(0,0,0,.05) !important;
+
+  transition:.3s ease;
+}
+
+.profile-card:hover{
+  transform:translateY(-3px);
+}
+
+/* =========================================
+   COVER
+========================================= */
+.profile-cover{
+  position:relative;
+  height:140px;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1877f2 0%,
+      #4f46e5 45%,
+      #9333ea 100%
+    );
+}
+
+.profile-cover::before,
+.profile-cover::after{
+  content:'';
+  position:absolute;
+  border-radius:50%;
+  background:rgba(255,255,255,.12);
+}
+
+.profile-cover::before{
+  width:180px;
+  height:180px;
+  top:-70px;
+  right:-40px;
+}
+
+.profile-cover::after{
+  width:120px;
+  height:120px;
+  left:-20px;
+  bottom:-50px;
+}
+
+/* =========================================
+   PROFILE AVATAR
+========================================= */
+.profile-avatar{
+  display:flex;
+  justify-content:center;
+  margin-top:-65px;
+  position:relative;
+  z-index:2;
+}
+
+.avatar-container{
+  position:relative;
+  width:130px;
+  height:130px;
+  cursor:pointer;
+}
+
+.profile-pic{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  border-radius:50%;
+  border:5px solid #fff;
+
+  background:#fff;
+
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+/* =========================================
+   PROFILE INFO
+========================================= */
+.profile-info{
+  padding:20px 20px 10px;
+  text-align:center;
+}
+
+.profile-name{
+  font-size:24px;
+  font-weight:800;
+  color:#111827;
+  margin-bottom:5px;
+}
+
+.profile-profession{
+  font-size:14px;
+  line-height:1.5;
+  color:#6b7280;
+}
+
+/* =========================================
+   PROFILE BUTTONS
+========================================= */
+.profile-actions{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+
+  padding:0 20px 22px;
+}
+
+.profile-btn{
+  width:100%;
+  height:48px;
+
+  border-radius:14px !important;
+
+  font-size:14px;
+  font-weight:700;
+
+  transition:.25s ease !important;
+}
+
+.profile-btn:first-child{
+  background:linear-gradient(135deg,#1877f2,#2563eb) !important;
+  color:#fff !important;
+}
+
+.profile-btn:last-child{
+  background:#f3f4f6 !important;
+  color:#111827 !important;
+}
+
+.profile-btn:hover{
+  transform:translateY(-2px);
+}
+
+/* =========================================
+   CREATE POST
+========================================= */
+.post-top-container{
+  width:100%;
+  max-width:550px;
+  margin:auto;
+  padding:14px;
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.input-section{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.post-input{
+  width:100%;
+  height:44px;
+
+  padding:0 16px;
+
+  border:none;
+  outline:none;
+
+  border-radius:30px;
+
+  background:#f0f2f5;
+
+  font-size:15px;
+
+  cursor:pointer;
+
+  transition:.2s ease;
+}
+
+.post-input:hover{
+  background:#e4e6eb;
+}
+
+/* =========================================
+   ACTION BUTTONS
+========================================= */
+.actions-section{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:10px;
+
+  margin-top:12px;
+}
+
+.action-btn{
+  flex:1;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+
+  padding:12px;
+
+  border:none;
+  border-radius:12px;
+
+  font-size:14px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.2s ease;
+}
+
+.action-btn:hover{
+  transform:translateY(-2px);
+}
+
+.live-video{
+  background:#fee2e2;
+  color:#dc2626;
+}
+
+.photo-video{
+  background:#dcfce7;
+  color:#16a34a;
+}
+
+.reel{
+  background:#fef3c7;
+  color:#d97706;
+}
+
+/* =========================================
+   FEED
+========================================= */
+.feed-wrapper{
+  width:100%;
+  max-width:680px;
+  margin:0 auto;
+}
+
+.feed-container{
+  margin-bottom:20px;
+
+  border-radius:18px;
+
+  background:#fff;
+
+  overflow:hidden;
+
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+/* =========================================
+   RIGHT SIDEBAR USERS
+========================================= */
+.client-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  padding:12px;
+  margin-bottom:12px;
+
+  border-radius:16px;
+
+  background:#fff;
+
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.mat-avatar{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.client-info{
+  flex:1;
+}
+
+.custom-title{
+  text-decoration:none;
+  color:#050505;
+  font-weight:600;
+}
+
+.custom-title:hover{
+  text-decoration:underline;
+}
+
+/* =========================================
+   SKELETON
+========================================= */
+.skeleton-card{
+  padding:20px;
+}
+
+.skeleton-avatar{
+  width:110px;
+  height:110px;
+
+  border-radius:50%;
+
+  margin:10px auto 20px;
+
+  background:#e5e7eb;
+}
+
+.skeleton-line{
+  height:14px;
+
+  margin:12px auto;
+
+  border-radius:10px;
+
+  background:#e5e7eb;
+}
+
+.skeleton-line.medium{
+  width:70%;
+}
+
+.skeleton-line.short{
+  width:45%;
+}
+
+.button-gap{
+  display:flex;
+  gap:10px;
+}
+
+.skeleton-btn{
+  width:100%;
+  height:45px;
+
+  margin-top:12px;
+
+  border-radius:14px;
+
+  background:#e5e7eb;
+}
+
+/* =========================================
+   MOBILE TOOLBAR
+========================================= */
+
+.toolbar-title{
+  font-size:18px;
+  font-weight:700;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+@media(max-width:1024px){
+
+  .side-nav-left,
+  .side-nav-right{
+    width:280px;
+  }
+
+  .main-content{
+    padding:70px 10px 20px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+@media(max-width:768px){
+
+  .main-content{
+    padding:65px 8px 20px;
+  }
+
+  .post-top-container,
+  .feed-wrapper{
+    max-width:100%;
+  }
+
+  .actions-section{
+    flex-direction:column;
+  }
+
+  .action-btn{
+    width:100%;
+    justify-content:flex-start;
+  }
+
+  .profile-name{
+    font-size:20px;
+  }
+
+  .profile-profession{
+    font-size:13px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+@media(max-width:480px){
+
+  .post-top-container{
+    padding:12px;
+    border-radius:14px;
+  }
+
+  .post-input{
+    font-size:14px;
+  }
+
+  .action-btn{
+    font-size:13px;
+  }
+
+  .client-item{
+    padding:10px;
+  }
+
+  .mat-avatar{
+    width:42px;
+    height:42px;
+  }
+}
+
+
+
+
+
+.windows-loading{
+    position:fixed;
+    inset:0;
+    z-index:999999;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#ffffff;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.loading-content{
+    text-align:center;
+}
+
+.loading-content h2{
+    margin-top:30px;
+    margin-bottom:10px;
+    font-size:26px;
+    font-weight:500;
+    color:#202124;
+}
+
+.loading-content p{
+    color:#5f6368;
+    font-size:14px;
+}
+
+/* Windows 11 spinner */
+
+.win-spinner{
+    width:70px;
+    height:70px;
+    position:relative;
+    margin:auto;
+    animation:rotate 1.2s linear infinite;
+}
+
+.win-spinner span{
+    position:absolute;
+    width:8px;
+    height:8px;
+    background:#0078D4;
+    border-radius:50%;
+    top:50%;
+    left:50%;
+    margin:-4px;
+    transform-origin:0 -28px;
+}
+
+.win-spinner span:nth-child(1){transform:rotate(0deg) translateY(-28px);opacity:1;}
+.win-spinner span:nth-child(2){transform:rotate(45deg) translateY(-28px);opacity:.9;}
+.win-spinner span:nth-child(3){transform:rotate(90deg) translateY(-28px);opacity:.8;}
+.win-spinner span:nth-child(4){transform:rotate(135deg) translateY(-28px);opacity:.7;}
+.win-spinner span:nth-child(5){transform:rotate(180deg) translateY(-28px);opacity:.6;}
+.win-spinner span:nth-child(6){transform:rotate(225deg) translateY(-28px);opacity:.5;}
+.win-spinner span:nth-child(7){transform:rotate(270deg) translateY(-28px);opacity:.4;}
+.win-spinner span:nth-child(8){transform:rotate(315deg) translateY(-28px);opacity:.3;}
+
+@keyframes rotate{
+    from{
+        transform:rotate(0deg);
+    }
+    to{
+        transform:rotate(360deg);
+    }
+}

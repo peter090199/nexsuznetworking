@@ -1,0 +1,210 @@
+<mat-sidenav-container class="section-container">
+  <div class="windows-loading" *ngIf="isPageLoading">
+    <div class="loading-content">
+
+      <div class="win-spinner">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <h2>Loading</h2>
+      <p>Please wait...</p>
+
+    </div>
+  </div>
+
+  <!-- LEFT SIDENAV -->
+  <mat-sidenav #leftSidenav class="side-nav-left" [mode]="isMobile ? 'over' : 'side'" [opened]="!isMobile"
+    [fixedInViewport]="isMobile">
+
+    <div class="left-sidebar">
+
+      <!-- LOADING -->
+      <ng-container *ngIf="isLoading">
+
+        <mat-card class="profile-card skeleton-card">
+
+          <div class="skeleton-avatar"></div>
+
+          <mat-card-title class="skeleton-line medium"></mat-card-title>
+
+          <mat-card-subtitle class="skeleton-line short"></mat-card-subtitle>
+
+          <mat-card-content>
+            <div class="button-gap">
+              <div class="skeleton-btn"></div>
+              <div class="skeleton-btn"></div>
+            </div>
+          </mat-card-content>
+
+        </mat-card>
+
+      </ng-container>
+
+      <!-- PROFILE -->
+      <mat-card class="profile-card left-column" *ngIf="!isLoading && !isMobile">
+
+        <!-- COVER -->
+        <div class="profile-cover"></div>
+
+        <!-- AVATAR -->
+        <div class="profile-avatar">
+
+          <div class="avatar-container" (click)="uploadPic()">
+
+            <img *ngIf="profile_pic?.photo_pic; else defaultAvatar" [src]="profile_pic.photo_pic" class="profile-pic" />
+
+            <ng-template #defaultAvatar>
+              <img src="assets/images/default.png" class="profile-pic" />
+            </ng-template>
+
+          </div>
+
+        </div>
+
+        <!-- USER INFO -->
+        <div class="profile-info">
+
+          <h3 class="profile-name">
+            {{ profiles?.fname }} {{ profiles?.lname }}
+          </h3>
+
+          <p class="profile-profession">
+            {{ profiles?.profession }}
+          </p>
+
+        </div>
+
+        <!-- BUTTONS -->
+        <div class="profile-actions">
+
+          <button mat-button class="profile-btn"
+            [routerLink]="['/' + sharedRoutines.getRole() + '/profile', profiles.code]">
+            View Profile
+          </button>
+
+          <button mat-button class="profile-btn" (click)="printCV()" *ngIf="showDefUserButtons">
+            View CV
+          </button>
+
+        </div>
+
+      </mat-card>
+
+    </div>
+
+  </mat-sidenav>
+
+  <!-- MAIN CONTENT -->
+  <mat-sidenav-content>
+
+    <!-- MOBILE TOPBAR -->
+    <!-- <div class="mobile-toolbar" *ngIf="isMobile">
+
+      <button mat-icon-button (click)="leftSidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <span class="toolbar-title">Home</span>
+
+      <button mat-icon-button (click)="rightSidenav.toggle()">
+        <mat-icon>group</mat-icon>
+      </button>
+
+    </div> -->
+
+    <!-- POST INPUT -->
+    <div class="post-top-container" *ngIf="!isLoading">
+
+      <div class="input-section">
+        <input type="text" placeholder="Create your post?" class="post-input" readonly (click)="createPost()" />
+      </div>
+
+      <div class="actions-section">
+
+        <button class="action-btn live-video">
+          <span class="icon">🎥</span> Photo
+        </button>
+
+        <button class="action-btn photo-video">
+          <span class="icon">📷</span> Video
+        </button>
+
+        <button class="action-btn reel">
+          <span class="icon">🎞️</span> Events
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- FEED -->
+    <app-public-post></app-public-post>
+
+  </mat-sidenav-content>
+
+  <!-- RIGHT SIDENAV -->
+  <mat-sidenav #rightSidenav position="end" class="side-nav-right" [mode]="isMobile ? 'over' : 'side'"
+    [opened]="!isMobile" [fixedInViewport]="isMobile">
+
+    <div class="right-column" *ngIf="!isMobile || rightSidenav.opened">
+
+      <mat-card-header>
+        <mat-card-title>Suggested History</mat-card-title>
+      </mat-card-header>
+
+      <ng-container *ngIf="!isLoading && users?.length > 0; else noData">
+
+        <div *ngFor="let user of users" class="client-item">
+
+          <img *ngIf="user.photo_pic" [src]="user.photo_pic || 'assets/images/default.png'" alt="no image"
+            class="mat-avatar" />
+
+          <div class="client-info">
+
+            <h3 class="client-name">
+
+              <a class="custom-title" [routerLink]="
+                  user.role_code === 'DEF-USERS'
+                    ? ['/' + sharedRoutines.getRole() + '/profile', user.code]
+                    : ['/' + sharedRoutines.getRole() + '/client_profile', user.code]
+                ">
+                {{ user.fullname }}
+              </a>
+
+            </h3>
+
+          </div>
+
+          <div class="client-action" *ngIf="currentUserCode !== user.code">
+
+            <button mat-button [color]="user.follow_status === 'accepted' ? 'accent' : 'primary'"
+              (click)="AddConnect(user.code, user.fullname, user.follow_status, user.id)">
+              {{ user.follow_status === 'not_following' ? 'Connect' : 'Connected' }}
+            </button>
+
+          </div>
+
+        </div>
+
+      </ng-container>
+
+      <ng-template #noData>
+
+        <p class="no-data-text" *ngIf="!isLoading">
+          No suggested history available.
+        </p>
+
+      </ng-template>
+
+    </div>
+
+  </mat-sidenav>
+
+</mat-sidenav-container>

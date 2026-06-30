@@ -1,0 +1,322 @@
+/* ---------------------------
+   MAIN CONTAINER
+   --------------------------- */
+.jobs-container {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  width: 100%;
+  height: 100vh; /* fixed height */
+  overflow: hidden; /* prevent double scroll */
+  box-sizing: border-box;
+  font-family: Verdana, sans-serif;
+}
+.mat-subheader {
+  font-weight: 700;
+  font-size: 15px;
+  color: #333;
+  letter-spacing: 0.5px;
+}
+
+
+/* All mat-cards inside main container */
+.jobs-container mat-card {
+  height: 100vh;
+  overflow-y: auto;   /* individual scroll */
+  overflow-x: hidden;
+}
+
+/* ---------------------------
+   COLUMN WIDTHS
+   --------------------------- */
+.sidebar {
+  width: 300px;
+}
+
+.leftsidebar {
+  width: 360px;
+  transition: all 0.3s ease-in-out;
+}
+
+.savesidebar {
+  width: 300px;
+}
+
+/* ---------------------------
+   CARD STYLES
+   --------------------------- */
+mat-card.sidebar,
+mat-card.leftsidebar,
+mat-card.savesidebar {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+mat-card.sidebar
+{
+ flex: 1 1 300px;
+  min-width: 280px;
+  max-width: 450px;
+}
+
+mat-card.leftsidebar {
+  flex: 1 1 300px;
+  min-width: 580px;
+  max-width: 650px;
+  height:90vh;
+}
+
+
+mat-card.savesidebar {
+  flex: 1 1 200px;
+  min-width: 250px;
+  max-width: 350px;
+}
+
+mat-card.sidebar:hover,
+mat-card.leftsidebar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------------------------
+   JOB ITEM LIST
+   --------------------------- */
+.job-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 0;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.job-item:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+  transform: translateX(4px);
+}
+
+.job-item .job-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.job-details small {
+  display: block;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* ---------------------------
+   DETAIL SIDEBAR CONTENT
+   --------------------------- */
+.leftsidebar .job-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.4s forwards;
+}
+
+.company-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.job-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.company-name,
+.job-meta {
+  font-size: 0.875rem;
+  color: #555;
+}
+
+.sidebar-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.job-details-section h4 {
+  margin: 12px 0 6px;
+  margin-top: 40px;
+  font-weight: 600;
+}
+
+/* Scrollable area inside sidebar */
+.sidebar-scrollable {
+  flex: 1;
+  overflow-y: auto; /* enable vertical scroll */
+  padding: 16px;
+}
+
+
+
+.job-details-section{
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.job-description {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #555;
+}
+
+.job-description-wrapper {
+  margin-top: 16px;
+}
+
+.show-all {
+  font-size: 0.875rem;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+.show-all:hover {
+  text-decoration: underline;
+}
+
+/* ---------------------------
+   RECRUITER BLOCK
+   --------------------------- */
+.avatar-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.status-dot.online {
+  background-color: #4caf50;
+}
+.status-dot.offline {
+  background-color: #ccc;
+}
+
+.company-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 150px;
+}
+
+.custom-title {
+  font-weight: 500;
+  color: #007bff;
+  text-decoration: none;
+}
+.custom-title:hover {
+  text-decoration: underline;
+}
+
+/* ---------------------------
+   ANIMATIONS
+   --------------------------- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------------------------
+   OVERLAY (MOBILE)
+   --------------------------- */
+.sidebar-overlay {
+  display: none;
+}
+
+/* ---------------------------
+   RESPONSIVE
+   --------------------------- */
+@media screen and (max-width: 992px) {
+  .jobs-container {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
+  mat-card.sidebar,
+  mat-card.leftsidebar,
+  mat-card.savesidebar {
+    max-width: 100%;
+    height: auto;
+  }
+
+
+
+  .leftsidebar.active {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 900;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .company-logo {
+    width: 48px;
+    height: 48px;
+  }
+  .job-description {
+    font-size: 0.9rem;
+  }
+  .show-all {
+    font-size: 0.85rem;
+  }
+}
+
+
+/* Hide by default */
+.responsive-back-btn {
+  display: none;
+}
+
+/* Show only on mobile/tablet */
+@media screen and (max-width: 992px) {
+  .responsive-back-btn {
+    display: inline-flex; /* or block if you want full width */
+  }
+}
+.interview-status {
+  animation: pulse 1.2s infinite;
+  font-weight: 600;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}

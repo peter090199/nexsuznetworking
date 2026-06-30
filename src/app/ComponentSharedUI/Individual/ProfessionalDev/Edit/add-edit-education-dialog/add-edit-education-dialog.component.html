@@ -1,0 +1,67 @@
+<h2 mat-dialog-title>Edit Education</h2>
+
+<form [formGroup]="educationForm" >
+  <div mat-dialog-content>
+    <div class="form-row">
+      <mat-form-field appearance="standard" class="half-width">
+        <mat-label>Highest Education</mat-label>
+        <input matInput formControlName="highest_education" />
+      </mat-form-field>
+
+      <mat-form-field appearance="standard" class="half-width">
+        <mat-label>School Name</mat-label>
+        <input matInput formControlName="school_name" />
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="standard" class="half-width">
+        <mat-label>Start Month</mat-label>
+        <mat-select formControlName="start_month">
+          <mat-option *ngFor="let month of months" [value]="month">{{ month }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard" class="half-width">
+        <mat-label>End Month</mat-label>
+        <mat-select formControlName="end_month">
+          <mat-option *ngFor="let month of months" [value]="month">{{ month }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="standard" class="half-width">
+        <mat-label>Start Year</mat-label>
+        <mat-select formControlName="start_year">
+          <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard" class="half-width">
+        <mat-label>End Year</mat-label>
+        <mat-select formControlName="end_year">
+          <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+     <mat-form-field appearance="standard" class="half-width">
+        <mat-label>Education Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let option of educationStatusOptions" [value]="option.value">
+            {{ option.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="button-end">
+    <button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button color="primary" [disabled]="educationForm.invalid" (click)="submitForm()">
+      Update
+    </button>
+  </div>
+</form>

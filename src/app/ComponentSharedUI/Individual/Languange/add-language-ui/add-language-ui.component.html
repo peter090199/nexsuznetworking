@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>Language</h2>
+<mat-divider></mat-divider>
+  
+  <mat-form-field class="example-chip-list" appearance="standard">
+    <mat-label>Add Language</mat-label>
+    <mat-chip-list #chipList aria-label="Language selection">
+      <mat-chip
+        *ngFor="let language of languages"
+        (removed)="remove(language)">
+        {{language}}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+      <input
+        placeholder="Add language..."
+        #languageInput
+        [formControl]="languageCtrl"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let language of filteredLanguages | async" [value]="language">
+        {{language}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  
+  
+  <div class="button-end">
+    <button mat-raised-button color="warn" [mat-dialog-close]="true"> Cancel </button>
+    <button mat-raised-button color="primary" (click)="save()"> Add</button>
+  </div>
+
+  

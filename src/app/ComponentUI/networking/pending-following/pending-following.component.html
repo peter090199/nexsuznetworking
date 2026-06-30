@@ -1,0 +1,66 @@
+<div class="container">
+  <!-- People&Clients -->
+    <h1 style="text-align: center;">Invites Request</h1>
+    <!-- <h3>People skilled in Web Development also follow these pages</h3> --> 
+    <!-- <button mat-button color="primary" (click)="openSuggestionsModal()">
+      Show All
+    </button> -->
+
+    <div class="suggestions">
+      <mat-card class="suggestion-card" *ngFor="let person of people" >
+         <button mat-icon-button class="close-button">
+          <mat-icon>close</mat-icon>
+        </button>
+
+
+             <div class="profile-image-container">
+                <a [routerLink]="['/profile', person.follower_code]">
+                    <img [src]="person.photo_pic" [alt]="person.fullname" class="profile-image" />
+                </a>
+            </div>
+
+
+          <a [routerLink]="['/profile', person.follower_code]" class="custom-title">
+            {{ person.fullname }}
+          </a>
+
+          <mat-card-subtitle>{{ person.profession || '--' }}</mat-card-subtitle>
+          <p class="based-text">Based on your profile</p>
+        <div *ngIf="currentUserCode !== person.follower_code && person.follow_status === 'pending'" class="button-gap">
+        <!-- Accept Button -->
+        <button
+          mat-button
+          color="primary"
+          (click)="AddConnect(person.follower_code,person.fullname)">
+          <mat-icon>check</mat-icon>
+          Accept
+        </button>
+
+        <!-- Cancel Button -->
+        <button
+          mat-button
+          color="warn"
+          (click)="AddConnect(person.follower_code,person.fullname)">
+          <mat-icon>close</mat-icon>
+          Cancel
+        </button>
+      </div>
+
+<!--         
+          <button 
+            mat-stroked-button 
+            color="primary" 
+            *ngIf="currentUserCode !== person.follower_code"
+            (click)="AddConnect(person.follower_code,person.fullname)">
+            
+            <mat-icon class="hourglass-animated">hourglass_top</mat-icon>
+            Accept Pending 
+              <mat-icon>check</mat-icon>Accept
+          </button> -->
+
+
+      </mat-card>
+
+    </div>
+
+</div>

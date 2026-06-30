@@ -1,0 +1,90 @@
+<div class="jobs-container">
+
+  <!-- Sidebar -->
+  <mat-card class="sidebar" [class.active]="isSidebarActive">
+    <h3>Apply to your saved job</h3>
+
+    <div class="nav-list">
+      <div class="job-item">Preferences</div>
+      <div class="job-item">My jobs</div>
+      <div class="job-item">My Career Insights</div>
+    </div>
+
+    <div class="sidebar-actions">
+      <button mat-stroked-button>Manage job posts</button>
+    </div>
+  </mat-card>
+
+  <!-- Top Job Picks -->
+  <mat-card class="sidebar">
+    <h3>Top job picks for you</h3>
+
+    <!-- Skeleton while loading -->
+    <ng-container *ngIf="isLoading; else jobsList">
+      <div class="jobs-list">
+        <div class="subheader">Hiring Jobs</div>
+        <div class="job-item" *ngFor="let _ of skeletonRows">
+          <div class="skeleton skeleton-avatar" aria-hidden="true"></div>
+          <div class="job-details w-full">
+            <div class="skeleton skeleton-line w-56"></div>
+            <div class="skeleton skeleton-line w-40 mt-6px"></div>
+            <div class="skeleton skeleton-line w-32 mt-6px"></div>
+          </div>
+          <button mat-icon-button disabled aria-hidden="true">
+            <div class="skeleton skeleton-icon"></div>
+          </button>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="card-footer">
+        <div class="skeleton skeleton-line w-24 h-5"></div>
+      </div>
+    </ng-container>
+
+    <!-- Real Jobs List -->
+    <ng-template #jobsList>
+      <div class="jobs-list">
+        <div class="subheader">Hiring Jobs</div>
+        <div class="job-item" *ngFor="let job of jobs">
+          <img class="job-logo" [src]="job.job_image" alt="Company Logo">
+          <div class="job-details">
+            <a [routerLink]="['/recommended-jobs', job.transNo]">{{ job.job_name }}</a>
+            <small>{{ job.job_position }} · {{ job.work_type }}</small>
+          </div>
+          <button mat-icon-button color="warn" class="button-gap" (click)="removeJob(job)" matTooltip="Remove">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+     
+    </ng-template>
+    
+  </mat-card>
+
+  <!-- Recent Job Searches -->
+  <mat-card class="sidebar">
+    <div class="recent-header">
+      <h3>Recent job searches</h3>
+      <button mat-button (click)="clearSearches()" [disabled]="isLoading">Clear</button>
+    </div>
+
+    <!-- Skeleton -->
+    <ng-container *ngIf="isLoading; else recentContent">
+      <div class="skeleton skeleton-line w-40 h-5"></div>
+      <div class="skeleton skeleton-line w-28 h-4 mt-6px"></div>
+    </ng-container>
+
+    <!-- Real Content -->
+    <ng-template #recentContent>
+      <p>
+        {{ recentSearch.term }} ·
+        <span class="new">{{ recentSearch.count }} new</span>
+      </p>
+      <small>Alert On · {{ recentSearch.location }}</small>
+    </ng-template>
+  </mat-card>
+
+</div>
+
+<!-- Sidebar overlay for mobile -->
+<div class="sidebar-overlay" [class.active]="isSidebarActive" (click)="closeSidebar()"></div>

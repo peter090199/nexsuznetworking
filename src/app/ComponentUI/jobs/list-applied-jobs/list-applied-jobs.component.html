@@ -1,0 +1,346 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+  <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button>
+
+<section class="section">
+  <div class="search-div">
+    <mat-form-field class="w-90" appearance="standard">
+      <input matInput [(ngModel)]="searchKey" [placeholder]="placeHolder" (keyup)="applyFilter()" autocomplete="off" />
+
+      <button *ngIf="searchKey" mat-icon-button matSuffix aria-label="Clear" (click)="clearSearch()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="getJobPosting()">View</button>
+  </div>
+
+  <mat-tab-group>
+
+    <!-- ===================== TAB 1: APPLIED ===================== -->
+    <mat-tab label="Applied Active">
+      <mat-table [dataSource]="dataSourceApply" matSort class="mat-elevation-z4">
+        <ng-container *ngFor="let col of columnDefs" [matColumnDef]="col.columnDef">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ col.header }}
+          </mat-header-cell>
+
+          <mat-cell *matCellDef="let job">
+            <ng-container [ngSwitch]="col.columnDef">
+
+              <!-- Job Name -->
+              <ng-container *ngSwitchCase="'job_name'">
+                {{ job.job_name }}
+              </ng-container>
+
+              <!-- Fullname -->
+              <ng-container *ngSwitchCase="'fullname'">
+                <a [routerLink]="sharedService.getProfileRoute(job.code)">{{ job.fullname }}</a>
+              </ng-container>
+
+              <!-- Default Column -->
+              <ng-container *ngSwitchDefault>
+                {{ col.cell(job) }}
+              </ng-container>
+
+            </ng-container>
+
+            <!-- ACTION BUTTONS -->
+            <ng-container *ngIf="col.columnDef === 'actions'">
+              <button mat-icon-button color="primary" matTooltip="Mark as Review" (click)="markStatus(job, 'review')">
+                <mat-icon>hourglass_top</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" matTooltip="Mark as Rejected" (click)="markStatus(job, 'reject')">
+                <mat-icon>cancel</mat-icon>
+              </button>
+              <a (click)="openResumeDialog(job)" color="primary">
+                View CV
+              </a>
+            </ng-container>
+
+          </mat-cell>
+        </ng-container>
+
+        <!-- No data -->
+        <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length" class="text-center">
+            No data available
+          </mat-footer-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns" (contextmenu)="onRightClick($event, row)"></mat-row>
+        <mat-footer-row *matFooterRowDef="['noData']"
+          [ngClass]="{ hide: dataSourceApply.data.length > 0 }"></mat-footer-row>
+
+      </mat-table>
+
+      <mat-progress-bar *ngIf="isLoadingApply" mode="indeterminate" color="primary"></mat-progress-bar>
+      <mat-paginator #paginatorApply [pageSize]="5" [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+    </mat-tab>
+
+    <!-- ===================== TAB 2: ONGOING ===================== -->
+    <mat-tab label="Review Feedback">
+      <mat-table [dataSource]="dataSourceOngoing" matSort class="mat-elevation-z4">
+
+        <ng-container *ngFor="let col of columnDefs" [matColumnDef]="col.columnDef">
+
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ col.header }}
+          </mat-header-cell>
+
+          <mat-cell *matCellDef="let job">
+            <ng-container [ngSwitch]="col.columnDef">
+
+              <ng-container *ngSwitchCase="'job_name'">
+                <ng-container *ngIf="job.role_code === 'DEF-USERS';  else companyLink">
+                  {{ job.job_name}}
+                </ng-container>
+                <ng-template #companyLink>
+                  <a [routerLink]="sharedService.getClientProfileRoute(job.code)" class="custom-title">{{
+                    job.fullname}}</a>
+                </ng-template>
+              </ng-container>
+              <!-- <ng-container *ngSwitchCase="'job_name'">
+                <a [routerLink]="['/recommended-jobs', job.transNo]">{{ job.job_name }}</a>
+              </ng-container> -->
+
+              <ng-container *ngSwitchCase="'fullname'">
+                <a [routerLink]="sharedService.getProfileRoute(job.code)">{{ job.fullname }}</a>
+              </ng-container>
+
+              <ng-container *ngSwitchDefault>
+                {{ col.cell(job) }}
+              </ng-container>
+            </ng-container>
+            <!-- ACTIONS -->
+            <ng-container *ngIf="col.columnDef === 'actions'">
+              <!-- Mark as Approved -->
+              <button mat-icon-button color="accent" matTooltip="Mark as Approved"
+                (click)="markStatus(job, 'approved')">
+                <mat-icon>check_circle</mat-icon>
+              </button>
+              <!-- Interview -->
+              <button mat-icon-button color="accent" (click)="markStatusInterview(job,'interview')"
+                matTooltip="Interview">
+                <mat-icon>record_voice_over</mat-icon>
+              </button>
+
+              <button mat-icon-button color="warn" matTooltip="Mark as Rejected" (click)="markStatus(job, 'reject')">
+                <mat-icon>cancel</mat-icon>
+              </button>
+              <a (click)="openResumeDialog(job)" color="primary">
+                View CV
+              </a>
+            </ng-container>
+
+          </mat-cell>
+        </ng-container>
+
+        <!-- No data -->
+        <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length" class="text-center">No data
+            available</mat-footer-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns" (contextmenu)="onRightClick($event, row)"></mat-row>
+        <mat-footer-row *matFooterRowDef="['noData']"
+          [ngClass]="{ hide: dataSourceOngoing.data.length > 0 }"></mat-footer-row>
+
+      </mat-table>
+
+      <mat-progress-bar *ngIf="isLoadingOngoing" mode="indeterminate" color="primary"></mat-progress-bar>
+      <mat-paginator #paginatorOngoing [pageSize]="5" [pageSizeOptions]="[5,10,20]"
+        showFirstLastButtons></mat-paginator>
+    </mat-tab>
+
+
+
+    <!-- interview schedule -->
+    <mat-tab label="Interview Feedback">
+      <mat-table [dataSource]="dataSourceInterview" matSort class="mat-elevation-z4">
+
+        <ng-container *ngFor="let col of columnDefs" [matColumnDef]="col.columnDef">
+
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ col.header }}</mat-header-cell>
+
+          <mat-cell *matCellDef="let job">
+            <ng-container [ngSwitch]="col.columnDef">
+
+              <ng-container *ngSwitchCase="'job_name'">
+                <a>{{ job.job_name }}</a>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'fullname'">
+                <a [routerLink]="sharedService.getProfileRoute(job.code)">
+                  {{ job.fullname }}
+                </a>
+
+              </ng-container>
+
+              <ng-container *ngSwitchDefault>{{ col.cell(job) }}</ng-container>
+
+            </ng-container>
+
+            <!-- Delete Only -->
+            <ng-container *ngIf="col.columnDef === 'actions'">
+              <button mat-icon-button color="primary" matTooltip="Mark as Active"
+                (click)="markStatus(job, 'applied_active')">
+                <mat-icon>check_circle</mat-icon>
+              </button>
+              <a (click)="openResumeDialog(job)" color="primary">
+                View CV
+              </a>
+
+            </ng-container>
+
+          </mat-cell>
+        </ng-container>
+
+        <!-- No Data -->
+        <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length" class="text-center">No data
+            available</mat-footer-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns" (contextmenu)="onRightClick($event, row)"></mat-row>
+        <mat-footer-row *matFooterRowDef="['noData']"
+          [ngClass]="{ hide: dataSourceInterview.data.length > 0 }"></mat-footer-row>
+      </mat-table>
+
+      <mat-progress-bar *ngIf="isLoadingInterview" mode="indeterminate" color="primary"></mat-progress-bar>
+      <mat-paginator #paginatorInterview [pageSize]="5" [pageSizeOptions]="[5,10,20]"
+        showFirstLastButtons></mat-paginator>
+    </mat-tab>
+
+    <!-- ===================== TAB 3: FINISHED ===================== -->
+    <mat-tab label="Approved Feedback">
+      <mat-table [dataSource]="dataSourceFinished" matSort class="mat-elevation-z4">
+
+        <ng-container *ngFor="let col of columnDefs" [matColumnDef]="col.columnDef">
+
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ col.header }}</mat-header-cell>
+
+          <mat-cell *matCellDef="let job">
+            <ng-container [ngSwitch]="col.columnDef">
+
+              <ng-container *ngSwitchCase="'job_name'">
+                {{ job.job_name }}
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'fullname'">
+                <a [routerLink]="sharedService.getProfileRoute(job.code)">
+                  {{ job.fullname }}
+                </a>
+
+              </ng-container>
+
+              <ng-container *ngSwitchDefault>{{ col.cell(job) }}</ng-container>
+
+            </ng-container>
+
+            <!-- Delete Only -->
+            <ng-container *ngIf="col.columnDef === 'actions'">
+              <button mat-icon-button color="primary" matTooltip="Mark as Active"
+                (click)="markStatus(job, 'applied_active')">
+                <mat-icon>check_circle</mat-icon>
+              </button>
+              <a (click)="openResumeDialog(job)" color="primary">
+                View CV
+              </a>
+
+            </ng-container>
+
+          </mat-cell>
+        </ng-container>
+
+        <!-- No Data -->
+        <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length" class="text-center">No data
+            available</mat-footer-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns" (contextmenu)="onRightClick($event, row)"></mat-row>
+        <mat-footer-row *matFooterRowDef="['noData']"
+          [ngClass]="{ hide: dataSourceFinished.data.length > 0 }"></mat-footer-row>
+      </mat-table>
+
+      <mat-progress-bar *ngIf="isLoadingFinished" mode="indeterminate" color="primary"></mat-progress-bar>
+      <mat-paginator #paginatorFinished [pageSize]="5" [pageSizeOptions]="[5,10,20]"
+        showFirstLastButtons></mat-paginator>
+
+    </mat-tab>
+
+
+    <mat-tab label="Reject Feedback">
+      <mat-table [dataSource]="dataSourceReject" matSort class="mat-elevation-z4">
+
+        <ng-container *ngFor="let col of columnDefs" [matColumnDef]="col.columnDef">
+
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ col.header }}</mat-header-cell>
+
+          <mat-cell *matCellDef="let job">
+            <ng-container [ngSwitch]="col.columnDef">
+
+              <ng-container *ngSwitchCase="'job_name'">
+                {{ job.job_name }}
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'fullname'">
+                <a [routerLink]="sharedService.getProfileRoute(job.code)">{{ job.fullname }}</a>
+              </ng-container>
+
+              <ng-container *ngSwitchDefault>{{ col.cell(job) }}</ng-container>
+
+            </ng-container>
+
+            <!-- Delete Only -->
+            <ng-container *ngIf="col.columnDef === 'actions'">
+              <button mat-icon-button color="accent" matTooltip="Back to Applied Active"
+                (click)="markStatus(job, 'applied_active')">
+                <mat-icon>autorenew</mat-icon>
+              </button>
+              <a (click)="openResumeDialog(job)" color="primary">
+                View CV
+              </a>
+            </ng-container>
+
+          </mat-cell>
+        </ng-container>
+
+        <!-- No Data -->
+        <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length" class="text-center">No data
+            available</mat-footer-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns" (contextmenu)="onRightClick($event, row)"></mat-row>
+        <mat-footer-row *matFooterRowDef="['noData']"
+          [ngClass]="{ hide: dataSourceFinished.data.length > 0 }"></mat-footer-row>
+      </mat-table>
+
+      <mat-progress-bar *ngIf="isLoadingFinished" mode="indeterminate" color="primary"></mat-progress-bar>
+      <mat-paginator #paginatorFinished [pageSize]="5" [pageSizeOptions]="[5,10,20]"
+        showFirstLastButtons></mat-paginator>
+
+    </mat-tab>
+
+  </mat-tab-group>
+  <!-- Hidden right-click trigger -->
+  <div #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="rightClickMenu" style="position: fixed; visibility: hidden;">
+  </div>
+
+  <!-- Right-click menu -->
+  <mat-menu #rightClickMenu="matMenu">
+    <button mat-menu-item (click)="openResumeDialog(selectedJob)">
+      <mat-icon>visibility</mat-icon>
+      <span>View Resume</span>
+    </button>
+  </mat-menu>
+
+
+</section>

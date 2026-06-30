@@ -1,0 +1,88 @@
+
+mat-progress-bar {
+    margin-bottom: 10px;
+  }
+  mat-tab {
+    position: fixed;
+    top: 0;
+    margin-bottom: 30px;
+    z-index: 10; /* Ensure it's above the content */
+    background-color: white; /* Optional: set a background color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: add shadow */
+  }
+  
+  /* Optional: Adjust the content to ensure it has enough padding or margin below the tab header */
+  mat-tab-body {
+    padding-top: 60px; /* Add margin to avoid content being hidden behind the sticky tab header */
+  }
+  
+  
+  .container-card:hover {
+    transform: scale(1.02); /* Subtle zoom effect on hover */
+  }
+  
+  mat-card-content h3 {
+    font-size: 1.25rem;
+    margin-bottom: 3px;
+  }
+  
+  mat-card-content p {
+    font-size: 1rem;
+    margin: 4px 0;
+  }
+  
+  
+  mat-form-field {
+    width: 100%;
+    margin-top: 0;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2px;
+  }
+  
+  .card-container {
+    overflow: auto;
+    height: 200px;
+    max-height: 200px;
+    margin-top: 10px;
+  }
+  .full-width {
+    width: 100%;
+  }  
+/* Mobile (screens smaller than 768px) */
+@media (max-width: 767px) 
+{
+    mat-horizontal-stepper{
+        overflow: auto;
+        height: 500px;
+        max-height: 500px;
+        padding: 0px;
+   }
+    ::ng-deep mat-horizontal-stepper .mat-step-header {
+        display: none; 
+   
+     }
+     ma
+    mat-tab-group {
+      width: 100%;
+      margin: 16px auto;
+      padding: 0 8px;
+    }
+  
+    mat-tab-group h3 {
+      font-size: 1.25rem;
+    }
+  
+    mat-tab-group p {
+      font-size: 0.875rem;
+    }
+    
+  ::ng-deep .mat-autocomplete-panel {
+    max-height: 300px; /* Adjust the height as needed */
+    overflow-y: auto;
+  }
+  
+  }
+  

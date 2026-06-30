@@ -1,0 +1,300 @@
+/* General Styles */
+.post-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.post-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: start;
+  margin-top: 10px;
+}
+
+
+mat-dialog-actions {
+  padding-top: 10px;
+}
+textarea {
+  min-height: 200px; /* Default height */
+  max-height: 400px; /* Prevent excessive expansion */
+  overflow-y: auto; /* Show scrollbar when needed */
+  resize: vertical; /* Allow user to resize vertically */
+}
+
+/* .form-container{
+  min-height: 600px;
+  max-height: 90vh;  
+  overflow-y: auto;  
+  overflow-x: hidden;
+  width: 100%;
+  margin: 10px;
+} */
+
+/* Close Button Alignment */
+.button-end {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.button-end button {
+  margin: -10px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-row h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.form-row span {
+  font-size: 16px;
+  font-weight: 500;
+  color: #666;
+}
+
+.form-row img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.post-content {
+  padding: 15px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-dialog-actions {
+  padding: 15px;
+  border-top: 1px solid #ddd;
+}
+
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: #f3f2ef;
+  border-radius: 10px;
+  width: fit-content;
+}
+
+.profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2px;
+}
+
+.profile-name {
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  width: 200px;
+  gap: 5px;
+}
+
+.status-dropdown {
+  margin-left: 5px;
+  font-size: 13px;
+}
+
+.post-status {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+
+/* Mobile (Phones) */
+@media screen and (max-width: 600px) {
+  .mat-dialog-container {
+    width: 95% !important;
+    max-width: none !important;
+    padding: 16px;
+  }
+
+  h2 {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  mat-form-field {
+    font-size: 14px;
+  }
+
+  .post-actions {
+    justify-content: space-around;
+  }
+
+  mat-dialog-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  mat-dialog-actions button {
+    width: 100%;
+  }
+}
+
+/* Tablet */
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+  .mat-dialog-container {
+    width: 80% !important;
+    max-width: 500px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  mat-form-field {
+    font-size: 16px;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1025px) {
+  .mat-dialog-container {
+    width: 30% !important;
+    max-width: 300px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  mat-form-field {
+    font-size: 18px;
+  }
+}
+.video-player-container {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
+  background: black;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+}
+
+.overlay-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.6);
+  border: none;
+  border-radius: 50%;
+  padding: 16px;
+  color: white;
+  cursor: pointer;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0,0,0,0.7);
+  padding: 8px;
+  color: white;
+  font-size: 14px;
+}
+
+.controls button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.controls input[type="range"] {
+  flex-grow: 1;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-around; /* evenly space icons */
+  padding: 8px 0;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+  flex-wrap: wrap; /* wrap icons on smaller screens */
+}
+
+.action-btn {
+  flex: 1 1 40%; /* 3 icons per row on small screens */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 70px;
+  padding: 5px 0;
+}
+
+/* Icon hover effect */
+.action-btn mat-icon {
+  font-size: 24px;
+  transition: color 0.2s;
+}
+
+.action-btn:hover mat-icon {
+  color: #1976d2; /* Angular Material primary color */
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .post-actions {
+    padding: 4px 0;
+  }
+
+  .action-btn {
+    min-width: 50px;
+    padding: 6px 0;
+  }
+
+  .action-btn mat-icon {
+    font-size: 20px;
+  }
+}

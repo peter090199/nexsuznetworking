@@ -1,0 +1,42 @@
+<section class="section">
+  <mat-tab-group >
+    <div *ngIf="isLoading" class="spinner-wrapper">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+    <!-- PEOPLE TAB -->
+    <mat-tab label="People">
+      <ng-template matTabContent>
+        <div class="list-wrapper" *ngIf="!isLoading">
+          <app-user-and-recruiter></app-user-and-recruiter>
+        </div>
+
+        <div class="list-wrapper" *ngIf="!isLoading">
+          <app-base-on-recen-activity></app-base-on-recen-activity>
+        </div>
+      </ng-template>
+    </mat-tab>
+
+    <!-- RECRUITERS TAB -->
+    <!-- <mat-tab label="Recruiters">
+      <ng-template matTabContent>
+        <div class="list-wrapper">
+          <div class="grid">
+            <app-recruiters></app-recruiters>
+          </div>
+        </div>
+      </ng-template>
+    </mat-tab> -->
+
+    <!-- INVITES TAB -->
+    <mat-tab label="Invites">
+      <ng-template matTabContent>
+        <div class="list-wrapper">
+          <div class="grid">
+            <app-invites></app-invites>
+          </div>
+        </div>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+
+</section>

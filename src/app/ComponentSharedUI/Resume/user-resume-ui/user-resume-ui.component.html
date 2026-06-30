@@ -1,0 +1,92 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+  <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button>
+
+<h2 mat-dialog-title> {{ user.job_name }}</h2>
+<mat-divider></mat-divider>
+<mat-card-content>
+<section class="section">
+
+  <!-- ASIDE (LEFT PANEL) -->
+  <aside class="sidebar">
+    <div class="user-info">
+      <h3 class="name">{{ user.fullname }}</h3>
+      <p><span>Job:</span> {{ user.job_name }}</p>
+      <p><span>Email:</span> {{ user.email }}</p>
+
+      <p>
+        <span>Status:</span>
+        <b class="status" [ngClass]="getStatusClass(user.applied_status)">
+          {{ user.applied_status | titlecase }}
+        </b>
+      </p>
+
+      <!-- SCORE -->
+      <div class="score-card">
+        <div class="score-title">Evaluation Score</div>
+
+        <div class="circle">
+          <svg viewBox="0 0 130 130">
+            <circle class="bg" r="45" cx="65" cy="65"></circle>
+            <circle class="progress"
+              r="45"
+              cx="65"
+              cy="65"
+              [style.strokeDasharray]="circumference"
+              [style.strokeDashoffset]="strokeDashoffset">
+            </circle>
+          </svg>
+
+          <div class="score-text">
+            <strong>{{ score }}/{{ totalQuestions }}</strong>
+            <small>{{ percentage }}%</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+
+  <!-- MAIN CONTENT (RIGHT SIDE) -->
+  <div class="main-content">
+
+    <!-- RESUME PREVIEW -->
+    <div class="preview-box" *ngIf="selectedResume; else emptyState">
+      <ng-container *ngIf="isImage(selectedResume.url); else pdfView">
+        <img [src]="selectedResume.url" />
+      </ng-container>
+
+      <ng-template #pdfView>
+        <iframe [src]="selectedResume.safeUrl"></iframe>
+      </ng-template>
+    </div>
+
+    <ng-template #emptyState>
+      <div class="empty-state">
+        <mat-icon>insert_drive_file</mat-icon>
+        <p>No resume selected</p>
+      </div>
+    </ng-template>
+    <div class="qa-list">
+      <div class="qa-item" *ngFor="let item of data?.answers">
+
+        <div class="q-info">
+          <p>{{ item.question_text }}</p>
+          <small>{{ item.numeric_score }} pts</small>
+        </div>
+
+        <span class="badge"
+          [ngClass]="{
+            'yes': item.numeric_score === 1,
+            'maybe': item.numeric_score === 0.5,
+            'no': item.numeric_score === 0
+          }">
+          {{ item.answer_text || 'GENERAL' }}
+        </span>
+
+      </div>
+    </div>
+
+  </div>
+
+</section>

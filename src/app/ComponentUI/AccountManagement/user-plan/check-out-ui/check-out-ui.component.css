@@ -1,0 +1,329 @@
+/* ==========================
+   PAGE
+========================== */
+
+.checkout-page{
+    max-width:1300px;
+    margin:0 auto;
+    padding:30px;
+    background:#f5f7fb;
+    min-height:100vh;
+}
+
+.back-btn{
+    margin-bottom:20px;
+    font-weight:600;
+    border-radius:10px;
+}
+
+.checkout-header{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.checkout-header h2{
+    margin:0;
+    font-size:32px;
+    font-weight:700;
+    color:#1f2937;
+}
+
+.checkout-header p{
+    margin-top:8px;
+    color:#6b7280;
+    font-size:15px;
+}
+
+/* ==========================
+   GRID
+========================== */
+
+.checkout-container{
+    display:grid;
+    grid-template-columns:1.2fr 420px;
+    align-items:start;
+}
+
+/* ==========================
+   CARDS
+========================== */
+
+.payment-card,
+.summary-card{
+    border-radius:20px;
+    padding:28px;
+    background:#fff;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+/* ==========================
+   PAYMENT
+========================== */
+
+.payment-card h3{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:0 0 25px;
+    font-size:22px;
+}
+
+.payment-list{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.payment-option{
+    display:flex;
+    align-items:center;
+    width:100%;
+    padding:18px;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    transition:.25s;
+    cursor:pointer;
+    background:#fff;
+}
+
+.payment-option:hover{
+    border-color:#3f51b5;
+    background:#f8faff;
+}
+
+.pay-logo{
+    width:40px;
+    height:40px;
+    object-fit:contain;
+    margin-right:14px;
+}
+
+.payment-option mat-icon{
+    margin-right:12px;
+    color:#3f51b5;
+}
+
+/* ==========================
+   CARD FORM
+========================== */
+
+.card-form{
+    margin-top:25px;
+}
+
+.card-form mat-form-field{
+    width:100%;
+}
+
+.row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+/* ==========================
+   SUMMARY
+========================== */
+
+.plan-header{
+    text-align:center;
+}
+
+.plan-badge{
+    display:inline-block;
+    padding:6px 16px;
+    border-radius:30px;
+    background:#3f51b5;
+    color:#fff;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:12px;
+}
+
+.plan-header h2{
+    margin:0;
+    font-size:28px;
+    font-weight:700;
+}
+
+.plan-price{
+    margin-top:12px;
+    font-size:38px;
+    font-weight:700;
+    color:#3f51b5;
+}
+
+.plan-price small{
+    font-size:15px;
+    color:#777;
+}
+
+.feature-list{
+    margin:25px 0;
+}
+
+.feature-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+}
+
+.feature-item mat-icon{
+    color:#4caf50;
+}
+
+.pricing{
+    margin:25px 0;
+}
+
+.price-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+    font-size:16px;
+}
+
+.price-row.total{
+    border-top:1px solid #e5e7eb;
+    padding-top:18px;
+    margin-top:18px;
+    font-size:20px;
+    font-weight:700;
+}
+
+/* ==========================
+   BUTTON
+========================== */
+
+.subscribe-btn{
+    width:100%;
+    height:54px;
+    border-radius:14px;
+    font-size:17px;
+    font-weight:600;
+    margin-top:10px;
+}
+
+.subscribe-btn mat-icon{
+    margin-right:6px;
+}
+
+/* ==========================
+   SECURE NOTE
+========================== */
+
+.secure-note{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin-top:18px;
+    color:#6b7280;
+    font-size:14px;
+    text-align:center;
+}
+
+/* ==========================
+   TABLET
+========================== */
+
+@media(max-width:1024px){
+
+    .checkout-container{
+        grid-template-columns:1fr;
+    }
+
+    .summary-card{
+        order:-1;
+    }
+
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:768px){
+
+    .checkout-page{
+        padding:15px;
+    }
+
+    .checkout-header h2{
+        font-size:26px;
+    }
+
+    .checkout-header p{
+        font-size:14px;
+    }
+
+    .payment-card,
+    .summary-card{
+        padding:20px;
+        border-radius:16px;
+    }
+
+    .plan-price{
+        font-size:32px;
+    }
+
+    .row{
+        grid-template-columns:1fr;
+    }
+
+    .payment-option{
+        padding:15px;
+    }
+
+    .subscribe-btn{
+        height:50px;
+        font-size:16px;
+    }
+
+}
+
+/* ==========================
+   SMALL MOBILE
+========================== */
+
+@media(max-width:480px){
+
+    .checkout-page{
+        padding:12px;
+    }
+
+    .checkout-header{
+        margin-bottom:20px;
+    }
+
+    .checkout-header h2{
+        font-size:22px;
+    }
+
+    .payment-card h3{
+        font-size:20px;
+    }
+
+    .plan-header h2{
+        font-size:24px;
+    }
+
+    .plan-price{
+        font-size:28px;
+    }
+
+    .price-row{
+        font-size:15px;
+    }
+
+    .price-row.total{
+        font-size:18px;
+    }
+
+    .pay-logo{
+        width:34px;
+        height:34px;
+    }
+
+}
